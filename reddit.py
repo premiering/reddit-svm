@@ -99,7 +99,6 @@ def get_top_reddit_story(subreddit: str, time: REDDIT_TIMEFRAMES, comment_limit:
 def get_specific_story(post_url: str, comment_limit: int = 5) -> RedditStory:
     post = reddit.submission(url=post_url)
     post._fetch()# bad ???
-    print(post.__dict__)
     
     comments: list[RedditComment] = list()
     for comment in post.comments:
