@@ -63,6 +63,6 @@ def create_video(story: RedditStory, output_file: str, bg_video_path: str = None
     
     final_video = speedx.speedx(final_video, speed)
     (w, h) = final_video.size
-    final_video = crop(final_video, width=720, height=1080, x_center=w/2, y_center=h/2)
+    final_video = crop(final_video, width=720, height=1280, x_center=w/2, y_center=h/2)
 
     final_video.write_videofile(output_file)
