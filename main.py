@@ -20,7 +20,7 @@ def main(
     if reddit_client_id == None or reddit_user_agent == None:
         raise Exception("Must have all Reddit API credentials to use API!")
     
-    if top_timeframe not in get_args(reddit.REDDIT_TIMEFRAMES):
+    if not subreddit == None and top_timeframe not in get_args(reddit.REDDIT_TIMEFRAMES):
         raise Exception("top_timeframe must be one of the following: " + ", ".join(reddit.REDDIT_TIMEFRAMES.__args__))
 
     reddit.REDDIT_CLIENT_ID = reddit_client_id
