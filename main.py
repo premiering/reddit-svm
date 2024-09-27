@@ -12,7 +12,8 @@ def main(
     output_file: str = "output.mp4",
     subreddit: str = None, 
     top_timeframe: str = None, 
-    post_url: str = None
+    post_url: str = None,
+    comment_limit: int = 5
 ):
     if subreddit == None and top_timeframe == None and post_url == None:
         raise Exception("Must choose to use a subreddit and top_timeframe, or a post_url!")
@@ -30,9 +31,9 @@ def main(
 
     story: reddit.RedditStory
     if post_url != None:
-        story = reddit.get_specific_story(post_url, 3)
+        story = reddit.get_specific_story(post_url, comment_limit)
     else:
-        story = reddit.get_top_reddit_story(subreddit, top_timeframe)
+        story = reddit.get_top_reddit_story(subreddit, top_timeframe, comment_limit)
     
     print("Found story: " + story.title)
     print("Creating video to " + output_file)

@@ -23,7 +23,7 @@ def take_post_screenshot(id: str, url: str, output_file: str):
         except Exception:
             pass
 
-        page.locator(f"[id=t3_{id}]").screenshot(path=output_file)
+        page.locator(f"[id=t3_{id}]").screenshot(path=output_file, scale='css')
         browser.close()
 
 def take_comment_screenshot(url: str, output_path: str):
@@ -55,7 +55,5 @@ def take_comment_screenshot(url: str, output_path: str):
         except Exception:
             pass
 
-        page.locator(f"[thingid=t1_{(url[-8:])[:-1]}]").nth(1).screenshot(
-            path=output_path
-        )
+        page.locator(f"[thingid=t1_{(url[-8:])[:-1]}]").nth(1).screenshot(path=output_path, scale='css')
         browser.close()
