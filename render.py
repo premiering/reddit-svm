@@ -1,7 +1,7 @@
 from gtts import gTTS
 from moviepy.editor import *
 from moviepy.video.fx import speedx
-from moviepy.video.fx.all import crop
+from moviepy.video.fx.all import crop, resize
 from reddit import *
 import automation
 from pathlib import Path
@@ -62,7 +62,8 @@ def create_video(story: RedditStory, output_file: str, bg_video_path: str = None
         final_video = final_video.set_audio(final_audio)
     
     final_video = speedx.speedx(final_video, speed)
+    final_video = final_video.resize((2276, 1280))
     (w, h) = final_video.size
-    final_video = crop(final_video, width=720, height=1280, x_center=w/2, y_center=h/2)
+    final_video = crop(final_video, width=768, height=1366, x_center=w/2, y_center=h/2)
 
     final_video.write_videofile(output_file)
