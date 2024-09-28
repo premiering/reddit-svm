@@ -1,6 +1,7 @@
 assets/
 temp/
 output.mp4
+outputTEMP_MPY_wvf_snd.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
