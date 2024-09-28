@@ -1,6 +1,7 @@
 import reddit
 import render
 import typer
+import automation
 from typing import get_args
 
 def main(
@@ -13,7 +14,11 @@ def main(
     subreddit: str = None, 
     top_timeframe: str = None, 
     post_url: str = None,
-    comment_limit: int = 5
+    comment_limit: int = 5,
+    page_load_sec: float = 0.5,
+    speed: float = 1.4,
+    fps: int = 60,
+    preview: bool = False
 ):
     if subreddit == None and top_timeframe == None and post_url == None:
         raise Exception("Must choose to use a subreddit and top_timeframe, or a post_url!")
@@ -29,6 +34,8 @@ def main(
     reddit.REDDIT_USER_AGENT = reddit_user_agent
     reddit.update_reddit()
 
+    automation.PAGE_LOAD_SEC = page_load_sec
+
     story: reddit.RedditStory
     if post_url != None:
         story = reddit.get_specific_story(post_url, comment_limit)
@@ -37,7 +44,7 @@ def main(
     
     print("Found story: " + story.title)
     print("Creating video to " + output_file)
-    render.create_video(story, output_file, bg_video_path, bg_music_path, 60)
+    render.create_video(story=story, output_file=output_file, bg_video_path=bg_video_path, bg_music_path=bg_music_path, fps=fps, speed=speed, preview=preview)
 
 if __name__ == "__main__":
     typer.run(main)

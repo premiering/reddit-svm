@@ -10,7 +10,7 @@ def _generate_tts(text, filename='audio.mp3', lang='en'):
     tts = gTTS(text, lang=lang)
     tts.save(filename)
 
-def create_video(story: RedditStory, output_file: str, bg_video_path: str = None, bg_music_path: str = None, fps: int = 60, speed: float = 1.4):
+def create_video(story: RedditStory, output_file: str, bg_video_path: str, bg_music_path: str, fps: int, speed: float, preview: bool):
     """Renders and saves a video using the given Reddit story and assets. Output file must be .mp4 or .avi"""
     if not output_file.endswith(".mp4") and not output_file.endswith(".avi"):
         raise Exception("Output file must be an mp4 or avi!")
@@ -72,4 +72,7 @@ def create_video(story: RedditStory, output_file: str, bg_video_path: str = None
     final_video = crop(final_video, width=608, height=1080, x_center=w/2, y_center=h/2)
     final_video = final_video.resize((768, 1366))
 
-    final_video.write_videofile(output_file)
+    if preview:
+        final_video.preview(fps=fps)
+
+    final_video.write_videofile(output_file, threads=8)

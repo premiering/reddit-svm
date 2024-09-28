@@ -2,6 +2,9 @@ import time
 from playwright.sync_api import sync_playwright
 import reddit
 
+# How many seconds will we wait for the page to load?
+PAGE_LOAD_SEC = 0.5
+
 # Web automation for screenshots of Reddit posts
 # todo, some clean up
 
@@ -13,7 +16,7 @@ def take_post_screenshot(id: str, url: str, output_file: str):
         ctx.add_cookies([{"name": "theme", "value": "2", "domain": "www.reddit.com", "path": "/"}])
         page = ctx.new_page()
         page.goto(url)
-        time.sleep(2)
+        time.sleep(PAGE_LOAD_SEC)
 
         try:
             close_popup_btn = page.locator("[id=secondary-button]")
@@ -35,7 +38,7 @@ def take_comment_screenshot(url: str, output_path: str):
         ctx.set_default_timeout(5000)
         page = ctx.new_page()
         page.goto(url)
-        time.sleep(2)
+        time.sleep(PAGE_LOAD_SEC)
 
         # closes the nsfw popup via the close button if it exists
         try:
